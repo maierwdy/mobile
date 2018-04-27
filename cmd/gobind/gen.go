@@ -139,6 +139,9 @@ func genPkg(lang string, p *types.Package, allPkg []*types.Package, classes []*j
 			Prefix: *prefix,
 		}
 		g.Init(otypes)
+		if p != nil {
+			fname = g.Prefix + fname
+		}
 		w, closer := writer(filepath.Join("src", "gobind", pname+"_darwin.h"))
 		processErr(g.GenGoH())
 		io.Copy(w, &buf)
